@@ -20,12 +20,12 @@ pastetime <- function(a,b) {
     datime
 }
 
-##create plot, create new row for kilowatts
+##add date time column to data, create new column for kilowatts
 z<- pastetime(x,y)
 tc=strptime(z, format = "%d/%m/%Y %H:%M:%S")
 dat <- cbind(data,tc)
-dat <- mutate(dat, kwatt= as.numeric(dat$Global_active_power)/1000)
-plot(dat$tc, dat$kwatt, type = "line", xlab = "", ylab = "Global Active Power (kilowatts)" )
+dat <- mutate(dat, kwatt= as.numeric(as.character(dat$Global_active_power)))
+plot(dat$tc, dat$kwatt, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)" )
 
 ##convert to png
 dev.copy(png, file = "plot2.png")
